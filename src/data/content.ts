@@ -27,7 +27,7 @@ export const navItems = [
 ] as const
 
 export const bioParagraphs = [
-  `I am an MSc Computer Science student at Roskilde University, after a BSc in Computer Science and Engineering at the University of Bologna. I am an EU citizen, no work permit required, and I am looking for a part-time student developer position.`,
+  `I am an MSc Computer Science student at Roskilde University, after a BSc in Computer Science and Engineering at the University of Bologna.`,
   `I work mainly on Java backends (Spring Boot, Apache Camel). During an industry internship I integrated LLM APIs into a backend service. I also contribute to an open-source Python project.`,
   `For five years I worked part-time as a head waiter alongside my full-time degree, coordinating service and guests during busy weekend shifts.`,
 ]
