@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-bg: theme('colors.slate.900');
+  --color-text: theme('colors.slate.400');
+  --color-heading: theme('colors.slate.200');
+  --color-accent: theme('colors.teal.300');
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-slate-900 font-sans text-slate-400 antialiased;
+}
+
+::selection {
+  background-color: rgb(94 234 212 / 0.2);
+  color: theme('colors.teal.300');
+}
+
+@layer utilities {
+  .nav-indicator {
+    @apply mr-4 h-px w-8 bg-slate-600 transition-all group-hover:w-16 group-hover:bg-slate-200 group-focus-visible:w-16 group-focus-visible:bg-slate-200 motion-reduce:transition-none;
+  }
+
+  .nav-indicator-active {
+    @apply w-16 bg-slate-200;
+  }
+}
