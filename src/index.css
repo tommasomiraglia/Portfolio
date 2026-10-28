@@ -3,31 +3,168 @@
 @tailwind utilities;
 
 :root {
-  --color-bg: theme('colors.slate.900');
-  --color-text: theme('colors.slate.400');
-  --color-heading: theme('colors.slate.200');
-  --color-accent: theme('colors.teal.300');
+  color-scheme: dark;
 }
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
 }
 
 body {
-  @apply bg-slate-900 font-sans text-slate-400 antialiased;
+  @apply bg-base font-sans text-fg antialiased;
+}
+
+/* Desktop "wallpaper": a fixed soft glow behind everything. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(60rem 40rem at 15% -10%, rgb(23 147 209 / 0.22), transparent 60%),
+    radial-gradient(50rem 40rem at 110% 30%, rgb(88 101 242 / 0.12), transparent 60%),
+    radial-gradient(40rem 30rem at 50% 120%, rgb(23 147 209 / 0.1), transparent 60%);
 }
 
 ::selection {
-  background-color: rgb(94 234 212 / 0.2);
-  color: theme('colors.teal.300');
+  background-color: rgb(23 147 209 / 0.4);
 }
 
-@layer utilities {
-  .nav-indicator {
-    @apply mr-4 h-px w-8 bg-slate-600 transition-all group-hover:w-16 group-hover:bg-slate-200 group-focus-visible:w-16 group-focus-visible:bg-slate-200 motion-reduce:transition-none;
+:focus-visible {
+  @apply rounded-md outline outline-2 outline-offset-2 outline-arch-light;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 
-  .nav-indicator-active {
-    @apply w-16 bg-slate-200;
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
   }
+}
+
+@layer components {
+  /* A frosted-glass panel, like a window on a tiling desktop. */
+  .window {
+    @apply relative rounded-2xl border border-white/[0.08] bg-white/[0.035] shadow-[0_1px_0_0_rgb(255_255_255/0.05)_inset] backdrop-blur-xl;
+  }
+
+  /* Gradient border that fades in on hover, like a focused window. */
+  .window-active::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, #1793d1, #7aa2f7 50%, #33ccff);
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .window-active {
+    transition:
+      transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+      box-shadow 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .window-active:hover,
+  .window-active:focus-within {
+    transform: translateY(-3px);
+    box-shadow: 0 24px 60px -24px rgb(23 147 209 / 0.45);
+  }
+
+  .window-active:hover::before,
+  .window-active:focus-within::before {
+    opacity: 1;
+  }
+
+  .chip {
+    @apply rounded-lg bg-white/[0.06] px-2.5 py-1 text-xs font-medium text-muted;
+  }
+
+  .button-primary {
+    @apply inline-flex items-center gap-2.5 rounded-xl bg-arch px-5 py-3 text-sm font-medium text-white shadow-[0_8px_30px_-8px_rgb(23_147_209/0.7)] transition duration-300 ease-smooth hover:-translate-y-0.5 hover:bg-[#1fa3e4];
+  }
+
+  .button-glass {
+    @apply inline-flex items-center gap-2.5 rounded-xl border border-white/10 bg-white/[0.05] px-5 py-3 text-sm font-medium text-fg backdrop-blur-xl transition duration-300 ease-smooth hover:-translate-y-0.5 hover:bg-white/10;
+  }
+
+  .link {
+    @apply text-arch-light underline decoration-arch-light/30 underline-offset-4 transition-colors hover:decoration-arch-light;
+  }
+
+  /* Blog post code: inline code as a soft chip, blocks as glass panels. */
+  .prose :where(code):not(:where(pre code)) {
+    @apply rounded-md bg-white/[0.08] px-1.5 py-0.5 text-[0.85em] font-medium;
+  }
+
+  .prose pre {
+    @apply rounded-xl border border-white/[0.08] text-[0.85em] leading-relaxed;
+  }
+
+  /* Sections fade up as they scroll into view (see useReveal). */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+      opacity 0.9s cubic-bezier(0.2, 0.8, 0.2, 1),
+      transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Syntax colors for highlight.js, in the site's blue palette. */
+.hljs-keyword,
+.hljs-built_in,
+.hljs-type,
+.hljs-literal {
+  color: #7aa2f7;
+}
+
+.hljs-string,
+.hljs-attr,
+.hljs-regexp {
+  color: #9ece6a;
+}
+
+.hljs-number,
+.hljs-symbol {
+  color: #ff9e64;
+}
+
+.hljs-title,
+.hljs-title.function_,
+.hljs-section {
+  color: #5cb8ea;
+}
+
+.hljs-comment,
+.hljs-quote,
+.hljs-meta {
+  color: #636d83;
+  font-style: italic;
+}
+
+.hljs-variable,
+.hljs-params,
+.hljs-tag,
+.hljs-name {
+  color: #c0caf5;
 }
