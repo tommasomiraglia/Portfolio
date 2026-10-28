@@ -1,6 +1,6 @@
 /**
  * Blog posts are Markdown files in ./posts. The file name is the URL slug:
- * posts/my-first-post.md is served at /blog/my-first-post/.
+ * posts/my-first-post.md is served at /blog/my-first-post.
  *
  * Each file starts with a front-matter block:
  *

@@ -10,7 +10,7 @@ export function LatestWriting() {
         {posts.slice(0, 3).map((post) => (
           <li key={post.slug}>
             <a
-              href={`/blog/${post.slug}/`}
+              href={`/blog/${post.slug}`}
               className="group flex items-center gap-4 px-6 py-5 transition-colors duration-300 hover:bg-white/[0.03] sm:px-8"
             >
               <div className="min-w-0 flex-1">

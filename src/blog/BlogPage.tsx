@@ -7,7 +7,7 @@ import { Giscus } from './Giscus'
 import { renderMarkdown } from './markdown'
 import { formatDate, posts, type Post } from './posts'
 
-/** /blog/ shows the list, /blog/<slug>/ shows one post. */
+/** /blog/ shows the list, /blog/<slug> shows one post. */
 function slugFromPath() {
   return window.location.pathname.replace(/^\/blog\/?/, '').replace(/\/$/, '')
 }
@@ -49,7 +49,7 @@ function PostList() {
       <ul className="reveal mt-12 grid gap-5">
         {posts.map((post) => (
           <li key={post.slug} className="window window-active group">
-            <a href={`/blog/${post.slug}/`} className="block p-6 sm:p-8">
+            <a href={`/blog/${post.slug}`} className="block p-6 sm:p-8">
               <p className="text-sm text-muted">
                 {formatDate(post.date)} · {post.readingMinutes} min read
               </p>

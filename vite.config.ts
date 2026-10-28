@@ -5,7 +5,7 @@ import { defineConfig, type Connect, type Plugin } from 'vite'
 const page = (path: string) => fileURLToPath(new URL(path, import.meta.url))
 
 /**
- * Serves blog/index.html for every post URL (/blog/<slug>/) in dev and preview.
+ * Serves blog/index.html for every post URL (/blog/<slug>) in dev and preview.
  * vercel.json does the same in production.
  */
 function blogRoutes(): Plugin {
