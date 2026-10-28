@@ -9,8 +9,9 @@ const repos = {
 export const profile = {
   name: 'Tommaso Miraglia',
   title: 'MSc Computer Science student',
-  tagline:
-    'Java backend developer with hands-on experience integrating LLM APIs. Looking for a part-time student developer position in Denmark.',
+  tagline: 'I build backend services in Java and Python, and connect them to APIs, including LLMs.',
+  availability:
+    'Looking for a part-time student developer role in Copenhagen. EU citizen, no work permit needed, available alongside lectures.',
   photo: '/images/profile.jpg',
   email: 'tommasomiraglia2005@gmail.com',
   phone: '+45 81946145',
@@ -20,16 +21,18 @@ export const profile = {
   leetcode: 'https://leetcode.com/u/9y3nJjhyWe/',
 }
 
+/** Absolute links so the same nav works on the home page and on /blog/. */
 export const navItems = [
-  { id: 'about', label: 'About' },
-  { id: 'experience', label: 'Experience' },
-  { id: 'projects', label: 'Projects' },
-] as const
+  { label: 'Work', href: '/#experience' },
+  { label: 'Projects', href: '/#projects' },
+  { label: 'Writing', href: '/blog/' },
+  { label: 'Connect', href: '/#connect' },
+]
 
 export const bioParagraphs = [
-  `I am an MSc Computer Science student at Roskilde University, after a BSc in Computer Science and Engineering at the University of Bologna.`,
-  `I work mainly on Java backends (Spring Boot, Apache Camel). During an industry internship I integrated LLM APIs into a backend service. I also contribute to an open-source Python project.`,
-  `For five years I worked part-time as a head waiter alongside my full-time degree, coordinating service and guests during busy weekend shifts.`,
+  `I’m an MSc Computer Science student at Roskilde University. Before that I did a BSc in Computer Science and Engineering at the University of Bologna.`,
+  `Most of my work is on the backend. During my internship at Halnet I built an email-support bot with Spring Boot and Apache Camel that answers customers through the OpenAI API. I also work with SQL and TypeScript, and contribute to Chess Analyzer Pro, an open-source Python app.`,
+  `For five years I was also a head waiter on weekends while studying full time. It taught me reliability, clear communication and good time management.`,
 ]
 
 export type ExperienceItem = {
@@ -45,7 +48,7 @@ export type ExperienceItem = {
 export const experience: ExperienceItem[] = [
   {
     id: 'halnet',
-    date: 'Sep — Nov 2025',
+    date: 'Sep – Nov 2025',
     role: 'Software Developer Intern',
     company: 'Halnet',
     href: 'https://www.linkedin.com/company/halnet-s.r.l./home/',
@@ -58,7 +61,7 @@ export const experience: ExperienceItem[] = [
   },
   {
     id: 'waiter',
-    date: '2021 — Jul 2026',
+    date: '2021 – Jul 2026',
     role: 'Head Waiter',
     company: 'Part-time and weekends, alongside full-time studies',
     summary: [
@@ -68,7 +71,7 @@ export const experience: ExperienceItem[] = [
   },
   {
     id: 'eco',
-    date: 'May — Jul 2022',
+    date: 'May – Jul 2022',
     role: 'Web Developer Intern',
     company: 'ECO Certificazioni',
     summary: [
@@ -124,24 +127,33 @@ export const projects: ProjectItem[] = [
   },
 ]
 
-export const skills = [
-  'Java',
-  'Python',
-  'SQL',
-  'JavaScript',
-  'HTML/CSS',
-  'PHP',
-  'Spring Boot',
-  'Apache Camel',
-  'Maven',
-  'OpenAI API',
-  'n8n',
-  'PyTorch',
-  'scikit-learn',
-  'pandas',
-  'Git/GitHub',
-  'GitHub Actions',
-  'pytest',
-  'JUnit',
-  'Linux',
+/** Keep in sync with the CV. Icons are mapped by name in components/Toolbox.tsx. */
+export const skillGroups = [
+  {
+    label: 'Languages',
+    items: ['Java', 'Python', 'SQL', 'TypeScript', 'JavaScript', 'HTML/CSS', 'PHP'],
+  },
+  {
+    label: 'Backend & APIs',
+    items: ['Spring Boot', 'Apache Camel', 'Maven', 'API integration', 'OpenAI API', 'n8n'],
+  },
+  {
+    label: 'Data & ML',
+    items: ['pandas', 'scikit-learn', 'PyTorch', 'SQLite', 'Data modeling'],
+  },
+  {
+    label: 'Tools & testing',
+    items: ['Git', 'GitHub', 'GitHub Actions', 'pytest', 'JUnit', 'Linux', 'Claude Code'],
+  },
 ]
+
+/**
+ * Blog comments are stored in this repository's GitHub Discussions via giscus
+ * (https://giscus.app). Each post gets its own discussion, created on the first comment.
+ */
+export const comments = {
+  repo: 'tommasomiraglia/Portfolio',
+  repoId: 'R_kgDOVJz2pA',
+  category: 'General',
+  categoryId: 'DIC_kwDOVJz2pM4DJ2Lr',
+}
